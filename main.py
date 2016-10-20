@@ -32,7 +32,7 @@ def message(command, parameters):
     return header+length+command+parameter+check+end
 
 def discover():
-    print("discovering ...")
+    print("searching ...")
     nearby_devices = bluetooth.discover_devices(lookup_names=True)
     print("found %d devices" % len(nearby_devices))
 
