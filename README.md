@@ -1,4 +1,4 @@
-# alpha-ubtech
+# alpha-bluetooth
 UBTECH alpha robot comunication software (www.ubtrobot.com/)
 
 ## Bluetooth
