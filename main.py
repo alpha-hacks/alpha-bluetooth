@@ -1,22 +1,22 @@
 import bluetooth
+from alpha_1s import Command
 
 
 def main():
-    msg = message(b'\x18',[b'\x00'])
+    msg = message(b'\x18', [b'\x00'])
     print(msg)
     bd_addr = discover()
 
     if bd_addr:
-        port = 1
-        sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+        port = 6
+        sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
         sock.connect((bd_addr, port))
         print('Connected')
         sock.settimeout(60.0)
         sock.send(msg)
         print('Sent data')
-        data = sock.recv(1024)
-        print('received [%s]' % data)
-
+        response = sock.recv(1024)
+        print(Command().get(response))
         sock.close()
 
 
@@ -31,6 +31,7 @@ def message(command, parameters):
     check = bytes([sum(ord(x) for x in data)])
     return header+length+command+parameter+check+end
 
+
 def discover():
     print("searching ...")
     nearby_devices = bluetooth.discover_devices(lookup_names=True)
@@ -39,6 +40,7 @@ def discover():
     for addr, name in nearby_devices:
         if name == "ALPHA 1S":
             return addr
+
 
 if __name__ == '__main__':
     main()
