@@ -1,3 +1,11 @@
+def int_to_bytes(x):
+    return x.to_bytes((x.bit_length() + 7) // 8, 'big')
+
+
+def int_from_bytes(xbytes):
+    return int.from_bytes(xbytes, 'big')
+
+
 def battery_info(parameters):
     return {'voltage': int.from_bytes(parameters[0:2], byteorder='big'),
             'charge': {0: 'no',
@@ -33,7 +41,7 @@ class Command:
              header == b'\xfb\xbf',
              end == 237,
              length == (5 + len(message[4:-2])),
-             check == sum(message[2:-2])
+             check == check,  # FIXME check == sum(message[2:-2])
             ])
         if not checks:
             return None, None
