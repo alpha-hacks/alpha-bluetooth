@@ -9,7 +9,7 @@ UBTECH alpha robot comunication software (www.ubtrobot.com/)
 
 ```sh
 sudo apt-get install libbluetooth-dev
-pip3 install pybluez
+pip3 install -r requirements.txt
 ```
 ### Test
 
